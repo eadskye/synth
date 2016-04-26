@@ -2,7 +2,7 @@
 ///////////////////////////////////////////
 // https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API
 
-function Synth(audioCtx) {
+function Oscillator(audioCtx) {
   const oscNode = audioCtx.createOscillator();
   const gainNode = audioCtx.createGain();
 
@@ -20,4 +20,4 @@ function Synth(audioCtx) {
   // osc.connect(analyser);
 }
 
-module.exports = Synth;
+module.exports = Oscillator;

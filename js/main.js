@@ -1,8 +1,8 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const SynthComp = require('./synthComponent');
+const SynthApp = require('./SynthApp');
 
 ReactDOM.render(
-  <SynthComp />,
+  <SynthApp />,
   document.getElementById('main')
 );

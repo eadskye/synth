@@ -1,26 +1,30 @@
 const React = require('react');
-const GainButton = require('./components/gainButton');
-const FreqSlider = require('./components/freqSlider');
-const Synth = require('./synth');
+const GainButton = require('./gainButton');
+const FreqSlider = require('./freqSlider');
+const Oscillator = require('../oscillator');
+const audioCtx = require('../helpers/audioctx');
 
-const Oscillator = React.createClass({
+const OscillatorComponent = React.createClass({
+  synth: {},
   getInitialState: function() {
     return {
-      frequency: 1000,
+      frequency: 100,
       gain: false
     }
   },
 
   componentDidMount: function() {
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    var synth = new Synth(audioCtx);
+    this.synth = new Oscillator(audioCtx);
+    this.synth.setGain(0);
+    this.synth.setFreq(this.state.frequency);
+    this.synth.start();
   },
 
   handleSlide: function(e) {
     this.setState({
       frequency: e.target.value
     })
-    synth.frequency.value = this.state.frequency;
+    this.synth.setFreq(this.state.frequency);
   },
 
   handleGainClick: function(e) {
@@ -28,7 +32,7 @@ const Oscillator = React.createClass({
     this.setState({
       gain: !this.state.gain
     });
-    this.state.gain ? synth.gain = 0 : synth.gain = 1;
+    this.state.gain ? this.synth.setGain(0) : this.synth.setGain(1);
   },
 
   render: function() {
@@ -41,4 +45,4 @@ const Oscillator = React.createClass({
   }
 });
 
-module.exports = Oscillator;
+module.exports = OscillatorComponent;
