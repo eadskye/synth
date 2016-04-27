@@ -3,10 +3,11 @@ const GainButton = require('./gainButton');
 const FreqSlider = require('./freqSlider');
 const TypeToggle = require('./typeToggle');
 const Oscillator = require('../oscillator');
+const Scope = require('./scope');
 const audioCtx = require('../helpers/audioctx');
 
 const OscillatorComponent = React.createClass({
-  synth: {},
+  osc: {},
 
   // probably will need state in the future:
   getInitialState: function() {
@@ -17,7 +18,7 @@ const OscillatorComponent = React.createClass({
     }
   },
 
-  componentDidMount: function() {
+  componentWillMount: function() {
     this.osc = new Oscillator(audioCtx); // run all oscillator nodes in same audio context
     this.osc.setGain(0).setFreq(this.state.frequency).start();
   },
@@ -50,6 +51,7 @@ const OscillatorComponent = React.createClass({
         <GainButton on={this.state.gain} handleClick={this.handleGainClick}/>
         <FreqSlider frequency={this.state.frequency} handleSlide={this.handleSlide} />
         <TypeToggle type={this.state.type} handleToggle={this.handleTypeToggle} />
+        <Scope osc={this.osc.getOscNode()} />
       </div>
     )
   }

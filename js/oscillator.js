@@ -22,6 +22,9 @@ function Oscillator(audioCtx) {
   this.setType = (type) => {
     oscNode.type = type;
   }
+  this.getOscNode = () => {
+    return oscNode;
+  }
 
   oscNode.connect(gainNode);
   gainNode.connect(audioCtx.destination);

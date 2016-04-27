@@ -1,49 +1,60 @@
-var canvas = document.querySelector('.visualiser');
-var canvasCtx = canvas.getContext("2d");
-var bufferLength = analyser.frequencyBinCount;
-var dataArray = new Uint8Array(bufferLength);
-// analyser
-//
-const analyser = audioCtx.createAnalyser();
+const React = require('react');
+const audioCtx = require('../helpers/audioctx');
 
-analyser.fftSize = 2048;
+var Scope = React.createClass({
+  componentDidMount: function() {
+    this.buildScope()
+  },
+  buildScope: function() {
+    // memo me plz
+    var canvas = this.refs.canvas;
+    var ctx = canvas.getContext('2d');
+    var analyser = audioCtx.createAnalyser();
+    var bufferLength = analyser.frequencyBinCount;
+    var dataArray = new Uint8Array(bufferLength);
+    var width = canvas.width;
+    var height = canvas.height;
+    analyser.fftSize = 2048;
 
-function visualise() {
-  WIDTH = canvas.width;
-  HEIGHT = canvas.height;
-  canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+    this.props.osc.connect(analyser);
 
-  function draw() {
-    var sliceWidth = WIDTH * 1.0 / bufferLength;
-    var x = 0;
+    ctx.clearRect(0, 0, width, height);
 
-    drawVisual = requestAnimationFrame(draw);
-    analyser.getByteTimeDomainData(dataArray);
+    (function draw() {
+      var sliceWidth = width * 1.0 / bufferLength;
+      var x = 0;
 
-    canvasCtx.fillStyle = "rgb(200, 200, 200)";
-    canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-    canvasCtx.lineWidth = 2;
-    canvasCtx.strokeStyle = `rgb(0,0,0)`;
-    canvasCtx.beginPath();
+      drawVisual = requestAnimationFrame(draw);
+      analyser.getByteTimeDomainData(dataArray);
 
-    for (var i = 0; i < bufferLength; i++) {
-      var v = dataArray[i] / 128.0;
-      var y = v * HEIGHT / 2;
+      ctx.fillStyle = "rgb(200, 200, 200)";
+      ctx.fillRect(0, 0, width, height);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = `rgb(0,0,0)`;
+      ctx.beginPath();
 
-      if (i === 0) {
-        canvasCtx.moveTo(x, y);
-      } else {
-        canvasCtx.lineTo(x, y);
+      for (var i = 0; i < bufferLength; i++) {
+        var v = dataArray[i] / 128.0;
+        var y = v * height / 2;
+
+        if (i === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+        
+        x += sliceWidth;
       }
-      
-      x += sliceWidth;
-    }
 
-    canvasCtx.lineTo(canvas.width, canvas.height / 2);
-    canvasCtx.stroke();
-
+      ctx.lineTo(width, height / 2);
+      ctx.stroke();
+    })()
+  },
+  render: function() {
+    return(
+      <canvas ref="canvas"></canvas>
+    )
   }
-  draw();
-}
+});
 
-visualise();
+module.exports = Scope;
