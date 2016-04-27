@@ -1,8 +1,8 @@
 const React = require('react');
 
 const TypeToggle = (props) => {
-  var types = ['sine', 'square', 'sawtooth', 'triangle']
-  var active = { border: "1px solid purple"}
+  let types = ['sine', 'square', 'sawtooth', 'triangle']
+  let active = { border: "1px solid purple"}
   return(
     <div>
       {types.map((type) => {

@@ -6,7 +6,7 @@ const SynthApp = React.createClass({
     return {oscillators: []}
   },
   onAdd: function(e) {
-    var nextItems = this.state.oscillators.concat({id: Date.now()});
+    let nextItems = this.state.oscillators.concat({id: Date.now()});
     e.preventDefault();
     this.setState({ oscillators: nextItems });
   },

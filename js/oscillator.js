@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////
-// https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API
-
 function Oscillator(audioCtx) {
   const oscNode = audioCtx.createOscillator();
   const gainNode = audioCtx.createGain();
