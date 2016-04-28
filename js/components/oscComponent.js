@@ -51,7 +51,7 @@ const OscillatorComponent = React.createClass({
         <GainButton on={this.state.gain} handleClick={this.handleGainClick}/>
         <FreqSlider frequency={this.state.frequency} handleSlide={this.handleSlide} />
         <TypeToggle type={this.state.type} handleToggle={this.handleTypeToggle} />
-        <Scope osc={this.osc.getOscNode()} />
+        <Scope signal={this.osc.getOscNode()} />
       </div>
     )
   }

@@ -1,6 +1,9 @@
 const React = require('react');
 const audioCtx = require('../helpers/audioctx');
 
+/*
+ * @props {AudioNode} signal
+*/
 let Scope = React.createClass({
   componentDidMount: function() {
     this.buildScope()
@@ -17,7 +20,7 @@ let Scope = React.createClass({
     let height = canvas.height;
     analyser.fftSize = 2048;
 
-    this.props.osc.connect(analyser);
+    this.props.signal.connect(analyser);
 
     ctx.clearRect(0, 0, width, height);
 
