@@ -57,6 +57,8 @@ let Scope = React.createClass({
     buildScope(audioCtx, this.refs.canvas, this.props.signal)
   },
   componentWillReceiveProps: function(nextProps) {
+    // only redraw scope if we are summing the signal
+    if (!Array.isArray(nextProps.signal)) return;
     buildScope(audioCtx, this.refs.canvas, nextProps.signal);
   },
   render: function() {
