@@ -16,7 +16,7 @@ const SynthApp = React.createClass({
   },
   render: function() {
      return(
-       <div>
+       <div className="synth-main">
          <OscArray oscillators={this.state.oscillators} />
          <button onClick={this.onAdd}>Add New Oscillator</button>
        </div>

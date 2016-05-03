@@ -8,8 +8,10 @@ let createOscComponent = (oscComp) => {
 
 const OscillatorArray = (props) => {
   return (
-    <div>
-      {props.oscillators.map(createOscComponent)}
+    <div className="osc-array-main">
+      <div className="osc-array">
+        {props.oscillators.map(createOscComponent)}
+      </div>
       <Scope signal={props.oscillators.map((osc) => osc.osc.getOscNode())} />
     </div>
   )
