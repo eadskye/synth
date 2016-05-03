@@ -5,7 +5,7 @@ const TypeToggle = (props) => {
   return(
     <div>
       {props.types.map((type) => {
-        return <p onClick={props.handleToggle} value={type} style={props.type === type ? active : null}>{type}</p>
+        return <p onClick={props.handleToggle} key={type} value={type} style={props.type === type ? active : null}>{type}</p>
       })}
     </div>
   )
