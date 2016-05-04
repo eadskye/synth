@@ -1,10 +1,15 @@
 const React = require('react');
 const OscArray = require('./components/oscArray');
 const Oscillator = require('./oscillator');
+const FilterStage = require('./components/filterStage');
 
 const SynthApp = React.createClass({
   getInitialState: function() {
     return {oscillators: []}
+  },
+
+  summedSignal: function() {
+    return this.state.oscillators.map((osc) => osc.osc.getOscNode());
   },
 
   onAdd: function(e) {
@@ -25,12 +30,16 @@ const SynthApp = React.createClass({
   },
 
   render: function() {
-     return(
-       <div className="synth-main">
-         <OscArray oscillators={this.state.oscillators} destroy={this.onDestroy} />
-         <button onClick={this.onAdd}>Add New Oscillator</button>
-       </div>
-     )
+    return (
+      <div className="synth-main">
+        <OscArray
+          oscillators={this.state.oscillators}
+          destroy={this.onDestroy}
+          summedSignal={this.summedSignal()} />
+        <FilterStage signal={this.summedSignal()} />
+        <button onClick={this.onAdd}>Add New Oscillator</button>
+      </div>
+    )
   }
 });
 

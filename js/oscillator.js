@@ -1,11 +1,10 @@
 const audioCtx = require('./helpers/audioctx');
 
 function Oscillator() {
-  const oscNode = audioCtx.createOscillator();
-  const gainNode = audioCtx.createGain();
+  let oscNode = audioCtx.createOscillator();
+  let gainNode = audioCtx.createGain();
 
   oscNode.connect(gainNode);
-  gainNode.connect(audioCtx.destination);
 
   this.stop = () => oscNode.stop();
   this.start = () => {

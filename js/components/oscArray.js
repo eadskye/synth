@@ -1,5 +1,5 @@
 const React = require('react');
-const OscComponent = require('./oscComponent');
+const Oscillator = require('./oscComponent');
 const Scope = require('./scope');
 
 const OscillatorArray = (props) => {
@@ -7,15 +7,15 @@ const OscillatorArray = (props) => {
     <div className="osc-array-main">
       <div className="osc-array">
         {props.oscillators.map((osc) =>
-          <OscComponent 
-            id={osc.id} 
-            key={osc.id} 
-            osc={osc.osc} 
+          <Oscillator
+            id={osc.id}
+            key={osc.id}
+            osc={osc.osc}
             destroy={props.destroy}
           />
          )}
       </div>
-      <Scope signal={props.oscillators.map((osc) => osc.osc.getOscNode())} />
+      <Scope signal={props.summedSignal} />
     </div>
   )
 };
