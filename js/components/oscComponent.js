@@ -48,6 +48,8 @@ const OscillatorComponent = React.createClass({
   },
 
   componentWillUnmount: function() {
+    // TODO: perhaps destroy the Oscillator if webaudio doesnt do that already,
+    // (an OscillatorNode can only started/stopped once)
     this.props.osc.stop();
   },
 

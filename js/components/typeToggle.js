@@ -2,6 +2,7 @@ const React = require('react');
 
 const TypeToggle = (props) => {
   let active = { border: "1px solid purple"}
+
   return(
     <div>
       {props.types.map((type) => {

@@ -4,6 +4,7 @@ const DestroyButton = (props) => {
   let handleClick = function() {
     props.onDestroy(props.id);
   };
+
   return (
     <button onClick={handleClick}>DESTROY</button>
   )

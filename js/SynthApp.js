@@ -6,14 +6,15 @@ const SynthApp = React.createClass({
   getInitialState: function() {
     return {oscillators: []}
   },
+
   onAdd: function(e) {
     let nextItems = this.state.oscillators.concat({
       id: Date.now(),
       osc: new Oscillator()
     });
     this.setState({ oscillators: nextItems });
-    console.log(this.state);
   },
+
   onDestroy: function(id) {
     let nextItems = this.state.oscillators;
     let i = this.state.oscillators.findIndex((osc) => {
@@ -22,6 +23,7 @@ const SynthApp = React.createClass({
     nextItems.splice(i, 1);
     this.setState({ oscillators: nextItems });
   },
+
   render: function() {
      return(
        <div className="synth-main">
