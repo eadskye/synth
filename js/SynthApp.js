@@ -11,13 +11,21 @@ const SynthApp = React.createClass({
       id: Date.now(),
       osc: new Oscillator()
     });
-    e.preventDefault();
+    this.setState({ oscillators: nextItems });
+    console.log(this.state);
+  },
+  onDestroy: function(id) {
+    let nextItems = this.state.oscillators;
+    let i = this.state.oscillators.findIndex((osc) => {
+      return osc.id === id;
+    });
+    nextItems.splice(i, 1);
     this.setState({ oscillators: nextItems });
   },
   render: function() {
      return(
        <div className="synth-main">
-         <OscArray oscillators={this.state.oscillators} />
+         <OscArray oscillators={this.state.oscillators} destroy={this.onDestroy} />
          <button onClick={this.onAdd}>Add New Oscillator</button>
        </div>
      )
