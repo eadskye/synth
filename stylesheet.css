@@ -1,0 +1,24 @@
+* {
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+.synth-main {
+  display: flex;
+  flex-direction: column;
+}
+.osc-array {
+  display: flex;
+  flex-direction: row;
+}
+.osc-array-main {
+  display: flex;
+  flex-direction: column;
+}
+.synth-main > button {
+  padding: 2em;
+}
+.osc-component {
+  border: 1px solid purple;
+  margin: 1em 0;
+  padding: 1em;
+}
