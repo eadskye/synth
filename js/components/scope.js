@@ -1,9 +1,9 @@
 const React = require('react');
 const audioCtx = require('./../helpers/audioctx');
 
-let buildScope = function(audioEnv, canvas, signal) {
+let buildScope = function(canvas, signal) {
   // https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API
-  let analyser = audioEnv.createAnalyser();
+  let analyser = audioCtx.createAnalyser();
   let bufferLength = analyser.frequencyBinCount;
   let dataArray = new Uint8Array(bufferLength);
   analyser.fftSize = 2048;
@@ -54,14 +54,14 @@ let buildScope = function(audioEnv, canvas, signal) {
 */
 let Scope = React.createClass({
   componentDidMount: function() {
-    buildScope(audioCtx, this.refs.canvas, this.props.signal)
+    buildScope(this.refs.canvas, this.props.signal)
   },
 
   componentWillReceiveProps: function(nextProps) {
-    // cheap trick to only redraw the 'scope if we are summing the signal,
+    // cheap trick to only redraw the 'scope if we are "summing" the signal,
     // skips on single osc components
     if (!Array.isArray(nextProps.signal)) return;
-    buildScope(audioCtx, this.refs.canvas, nextProps.signal);
+    buildScope(this.refs.canvas, nextProps.signal);
   },
 
   render: function() {
