@@ -1,5 +1,6 @@
 const React = require('react');
 const audioCtx = require('./../helpers/audioctx');
+const connectSignal = require('../helpers/connectSignal');
 
 let buildScope = function(canvas, signal) {
   // https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API
@@ -8,11 +9,7 @@ let buildScope = function(canvas, signal) {
   let dataArray = new Uint8Array(bufferLength);
   analyser.fftSize = 2048;
 
-  let connectSignal = (signal) => {
-    signal.connect(analyser);
-  }
-
-  Array.isArray(signal) ? signal.forEach(connectSignal) : connectSignal(signal);
+  connectSignal(signal, analyser);
 
   let ctx = canvas.getContext('2d');
   let width = canvas.width;

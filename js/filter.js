@@ -1,4 +1,5 @@
 const audioCtx = require('./helpers/audioctx');
+const connectSignal = require('./helpers/connectSignal');
 
 function Filter() {
   let filterNode = audioCtx.createBiquadFilter();
@@ -8,14 +9,7 @@ function Filter() {
     filterNode.frequency.value = cutoff;
   }
 
-  this.connect = (signal) => {
-    // TODO: factor out this individual / array signal logic, shared w/ scope
-    let connectSignal = (signal) => {
-      signal.connect(filterNode);
-    }
-
-    Array.isArray(signal) ? signal.forEach(connectSignal) : connectSignal(signal);
-  }
+  this.connect = (signal) => { connectSignal(signal, filterNode) };
 }
 
 module.exports = Filter;
