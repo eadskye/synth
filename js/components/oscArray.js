@@ -5,6 +5,7 @@ const Scope = require('./scope');
 const OscillatorArray = (props) => {
   return (
     <div className="osc-array-main">
+      <button onClick={props.onAdd}>Add New Oscillator</button>
       <div className="osc-array">
         {props.oscillators.map((osc) =>
           <Oscillator

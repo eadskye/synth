@@ -1,5 +1,20 @@
+/*
+ * black:     rgb(34, 32, 37);
+ *
+ * trim:      rgb(206,255,26)
+ * trim-dark: rgb(85,80,92)
+ * dark:      rgb(58,64,52)
+ * light:     rgb(214,216,214)
+ *
+ */
+
 * {
   font-family: "Helvetica Neue", sans-serif;
+  color: rgb(214,216,214)
+}
+
+html {
+  background: rgb(32,32,37);
 }
 
 .synth-main {
@@ -14,11 +29,13 @@
   display: flex;
   flex-direction: column;
 }
-.synth-main > button {
+.osc-array-main > button {
   padding: 2em;
+  background: rgb(58,64,52);
+  border: 1px solid rgb(214,216,214);
 }
 .osc-component {
-  border: 1px solid purple;
+  border: 2px solid rgb(85,80,92)
   margin: 1em 0;
   padding: 1em;
 }

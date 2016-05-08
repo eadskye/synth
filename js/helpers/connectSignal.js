@@ -1,5 +1,5 @@
 /* 
- * A helper that connects either an array of AudioNodes or a single Audio node to
+ * A helper that connects either an array of AudioNodes or a single AudioNode to
  * an output AudioNode
  *
  * param {AudioNode, [AudioNode]} signal

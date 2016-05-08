@@ -33,11 +33,11 @@ const SynthApp = React.createClass({
     return (
       <div className="synth-main">
         <OscArray
+          onAdd={this.onAdd}
           oscillators={this.state.oscillators}
           destroy={this.onDestroy}
           summedSignal={this.summedSignal()} />
         <FilterStage signal={this.summedSignal()} />
-        <button onClick={this.onAdd}>Add New Oscillator</button>
       </div>
     )
   }

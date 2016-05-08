@@ -23,10 +23,10 @@ let buildScope = function(canvas, signal) {
     drawVisual = requestAnimationFrame(draw);
     analyser.getByteTimeDomainData(dataArray);
 
-    ctx.fillStyle = "rgb(200, 200, 200)";
+    ctx.fillStyle = 'rgb(58, 64, 52)';
     ctx.fillRect(0, 0, width, height);
     ctx.lineWidth = 2;
-    ctx.strokeStyle = `rgb(0,0,0)`;
+    ctx.strokeStyle = 'rgb(206,255,26)';
     ctx.beginPath();
 
     for (let i = 0; i < bufferLength; i++) {
@@ -56,7 +56,7 @@ let Scope = React.createClass({
 
   componentWillReceiveProps: function(nextProps) {
     // cheap trick to only redraw the 'scope if we are "summing" the signal,
-    // skips on single osc components
+    // and n inputs have changed. skips on single osc components
     if (!Array.isArray(nextProps.signal)) return;
     buildScope(this.refs.canvas, nextProps.signal);
   },
