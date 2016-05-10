@@ -1,6 +1,10 @@
 # Setup
 `$ npm install`
-`$ npm install -g webpack-dev-server`
 
-# Dev
-`$ webpack-dev-server`
+# Develop
+Launches a livereload expressJS server
+`$ gulp
+
+# Build
+Builds to ```/dist``` folder
+`$ gulp build`

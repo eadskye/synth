@@ -1,11 +1,8 @@
-
 $black:     rgb(34, 32, 37);
 $trim:      rgb(206,255,26);
 $trim-dark: rgb(85,80,92);
 $dark:      rgb(58,64,52);
 $light:     rgb(214,216,214);
-
-
 
 * {
   font-family: "Helvetica Neue", sans-serif;
@@ -13,7 +10,7 @@ $light:     rgb(214,216,214);
 }
 
 html {
-  background: $black
+  background: $black;
 }
 
 .synth-main {

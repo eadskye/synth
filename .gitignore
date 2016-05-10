@@ -1,2 +1,4 @@
 node_modules/
-js/bundle.js
+dist/
+.tmp/
+app/js/bundle.js
