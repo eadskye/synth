@@ -20,7 +20,7 @@ let buildScope = function(canvas, signal) {
     let sliceWidth = width * 1.0 / bufferLength;
     let x = 0;
 
-    drawVisual = requestAnimationFrame(draw);
+    requestAnimationFrame(draw);
     analyser.getByteTimeDomainData(dataArray);
 
     ctx.fillStyle = 'rgb(58, 64, 52)';
