@@ -5,39 +5,34 @@ const scope = require('../scope.js');
  * @props {AudioNode} signal
 */
 let Scope = React.createClass({
-  scope: {},
-
   getInitialState: function() {
     return {drawing: true};
   },
 
   componentDidMount: function() {
-    this.scope = scope(this.refs.canvas, this.props.signal);
+    this._scope = scope(this.refs.node, this.props.signal);
+    this._scope.start();
+    document.addEventListener('visibilitychange', this.handleVisibilityChange);
   },
 
   componentWillReceiveProps: function(nextProps) {
-    // cheap trick to only redraw the 'scope if we are "summing" the signal,
-    // and n inputs have changed. skips on single osc components
-    if (!Array.isArray(nextProps.signal)) return;
-    this.scope = scope(this.refs.canvas, nextProps.signal);
+    this._scope.destroy();
+    this._scope = scope(this.refs.node, nextProps.signal);
   },
 
   handleVisibilityChange: function() {
-  },
-
-  handleToggle: function() {
-    this.setState({
-      drawing: !this.state.drawing
-    })
-    this.state.drawing ? this.scope.start() : this.scope.stop();
+    if (document.hidden) {
+      this.setState({ drawing: false })
+    } else {
+      this.setState({ drawing: true })
+    }
   },
 
   render: function() {
+    // bypass for init render
+    if (this._scope !== undefined) this.state.drawing ? this._scope.start() : this._scope.stop();
     return(
-      <div>
-        <button onClick={this.handleToggle}>Toggle Scope</button>
-        <canvas ref="canvas"></canvas>
-      </div>
+      <div ref="node"></div>
     )
   }
 });

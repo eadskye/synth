@@ -1,7 +1,7 @@
 const audioCtx = require('./helpers/audioctx');
 const connectSignal = require('./helpers/connectSignal');
 
-let scope = function(canvas, signal) {
+let scope = function(el, signal) {
   // https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API
   let frame;
   let analyser = audioCtx.createAnalyser();
@@ -11,6 +11,8 @@ let scope = function(canvas, signal) {
 
   connectSignal(signal, analyser);
 
+  let canvas = document.createElement("canvas");
+  el.appendChild(canvas);
   let ctx = canvas.getContext('2d');
   let width = canvas.width;
   let height = canvas.height;
@@ -53,6 +55,9 @@ let scope = function(canvas, signal) {
     },
     stop: () => {
       window.cancelAnimationFrame(frame);
+    },
+    destroy: () => {
+     canvas.remove();
     }
   }
 }
