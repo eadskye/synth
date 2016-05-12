@@ -1,6 +1,6 @@
 const React = require('react');
 const Oscillator = require('./oscComponent');
-const Scope = require('./scope');
+const Scope = require('./scopeComponent');
 
 const OscillatorArray = (props) => {
   return (

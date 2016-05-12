@@ -3,7 +3,7 @@ const GainButton = require('./gainButton');
 const FreqSlider = require('./freqSlider');
 const TypeToggle = require('./typeToggle');
 const DestroyButton = require('./destroyButton');
-const Scope = require('./scope');
+const Scope = require('./scopeComponent');
 
 /* 
  * @props {AudioNode} osc

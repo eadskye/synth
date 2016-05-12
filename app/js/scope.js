@@ -1,9 +1,9 @@
-const React = require('react');
-const audioCtx = require('./../helpers/audioctx');
-const connectSignal = require('../helpers/connectSignal');
+const audioCtx = require('./helpers/audioctx');
+const connectSignal = require('./helpers/connectSignal');
 
-let buildScope = function(canvas, signal) {
+let scope = function(canvas, signal) {
   // https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API
+  let frame;
   let analyser = audioCtx.createAnalyser();
   let bufferLength = analyser.frequencyBinCount;
   let dataArray = new Uint8Array(bufferLength);
@@ -16,11 +16,10 @@ let buildScope = function(canvas, signal) {
   let height = canvas.height;
   ctx.clearRect(0, 0, width, height);
 
-  (function draw() {
+  function drawSteps() {
     let sliceWidth = width * 1.0 / bufferLength;
     let x = 0;
 
-    requestAnimationFrame(draw);
     analyser.getByteTimeDomainData(dataArray);
 
     ctx.fillStyle = 'rgb(58, 64, 52)';
@@ -44,28 +43,18 @@ let buildScope = function(canvas, signal) {
 
     ctx.lineTo(width, height / 2);
     ctx.stroke();
-  })()
-}
-/*
- * @props {AudioNode} signal
-*/
-let Scope = React.createClass({
-  componentDidMount: function() {
-    buildScope(this.refs.canvas, this.props.signal)
-  },
 
-  componentWillReceiveProps: function(nextProps) {
-    // cheap trick to only redraw the 'scope if we are "summing" the signal,
-    // and n inputs have changed. skips on single osc components
-    if (!Array.isArray(nextProps.signal)) return;
-    buildScope(this.refs.canvas, nextProps.signal);
-  },
-
-  render: function() {
-    return(
-      <canvas ref="canvas"></canvas>
-    )
+    frame = requestAnimationFrame(drawSteps);
   }
-});
 
-module.exports = Scope;
+  return {
+    start: () => {
+      drawSteps();
+    },
+    stop: () => {
+      window.cancelAnimationFrame(frame);
+    }
+  }
+}
+
+module.exports = scope;
